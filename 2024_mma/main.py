@@ -67,6 +67,10 @@ if __name__ == '__main__':
     
     if (analyzer_type == 's'):
         s = static(APIKEY, SERVER)
+
+        RESP = s.upload() # 기본적인 apk 업로드
+        s.scan(RESP)
+
         analyze = file_analyze.analyze(FILE)
         
         analyze.unpack() # 어플리케이션 파일 unpack()
