@@ -1,0 +1,11 @@
+BaseActivity
+
+onCreate 에서 
+106 줄에서 finish() 끝내는 문을 확인
+C0739b.m47k() 문이 TRUE이면 종료한다.
+m47k 문을 확인
+
+m48j문을 확인하여 locale.getLanguatge() 가 "ko" 가 맞으면 참을 내보낸다
+fidra 로 locale.getLanguatge() hook 을 걸어 무조건 ko가 나오게 한다.;
+
+m43o() 문은 Build.Tages 가 "test-keys" 가 되어야 된다.

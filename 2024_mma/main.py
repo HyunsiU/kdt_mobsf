@@ -59,7 +59,7 @@ if __name__ == '__main__':
     # analyzer_type = 's'
     
     SERVER = 'http://localhost:8000'
-    APIKEY = '65d6e9dc7fa1251bf799ed5e50811107a1576e97184491cd70b093a30f90bf7a'
+    APIKEY = '4abeecd72a14e6d537f5701b8bca47bcf488dcb0a2d68c134e029f8b374ef840'
     print("file select")
     FILE = filedialog.askopenfilename(initialdir = './',
                                         title = "파일선택",
