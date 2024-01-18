@@ -1,0 +1,57 @@
+{
+  "projectVersion": 1,
+  "files": [
+    "2024_mma\\depack\\download.dex"
+  ],
+  "treeExpansions": [
+    [
+      "com",
+      "소스코드",
+      "download.dex"
+    ],
+    [
+      "p000a",
+      "소스코드",
+      "download.dex"
+    ],
+    [
+      "ldjSxw.heBbQd",
+      "com",
+      "소스코드",
+      "download.dex"
+    ],
+    [
+      "com.ldjSxw.heBbQd.IntroActivity",
+      "ldjSxw.heBbQd",
+      "com",
+      "소스코드",
+      "download.dex"
+    ],
+    [
+      "p017a",
+      "ldjSxw.heBbQd",
+      "com",
+      "소스코드",
+      "download.dex"
+    ],
+    [
+      "com.ldjSxw.heBbQd.a.b",
+      "p017a",
+      "ldjSxw.heBbQd",
+      "com",
+      "소스코드",
+      "download.dex"
+    ]
+  ],
+  "codeData": {
+    "comments": [],
+    "renames": []
+  },
+  "openTabs": [],
+  "activeTab": -1,
+  "cacheDir": "2024_mma\\depack\\download.dex.cache",
+  "enableLiveReload": false,
+  "searchHistory": [
+    "m51g"
+  ]
+}

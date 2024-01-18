@@ -54,21 +54,75 @@ class dynamic:
         self.APIKEY = APIKEY
         self.SERVER = SERVER
 
+    def dynamic_get_app(self, app_name):
+        headers = {'Authorization': self.APIKEY}
+        response = requests.get(self.SERVER + '/api/v1/dynamic/get_apps',
+                     headers=headers).json()
+
+        
+        for i in response['apps']:
+            if(i['FILE_NAME'] == app_name):
+                return i['MD5']
+            
+
+    
+    def dynamic_start(self, app_hash):
+        headers = {'Authorization': self.APIKEY}
+        data = {'hash':app_hash}
+        response = requests.post(self.SERVER + '/api/v1/dynamic/start_analysis',
+                                 data=data,
+                                 headers=headers)
+        #print(data)
+        #print(response.text)
+    
+    def dynamic_frida(self, app_hash, fridacode):
+        headers = {'Authorization': self.APIKEY}
+        data = {'hash':app_hash,
+                'default_hooks':'api_monitor,ssl_pinning_bypass,root_bypass,debugger_check_bypass',
+                'auxiliary_hooks':'',
+                'frida_code':fridacode}
+        response = requests.post(self.SERVER + '/api/v1/frida/instrument',
+                                 data=data,
+                                 headers=headers)
+    
+    def dynamic_stop(self, app_hash):
+        headers = {'Authorization': self.APIKEY}
+        data = {'hash':app_hash,}
+        response = requests.post(self.SERVER + '/api/v1/dynamic/stop_analysis',
+                                 data=data,
+                                 headers=headers)
+    
+    def dynamic_report_json(self, app_hash):
+        headers = {'Authorization': self.APIKEY}
+        data = {'hash':app_hash,}
+        response = requests.post(self.SERVER + '/api/v1/dynamic/report_json',
+                                 data=data,
+                                 headers=headers).json()
+        
+        with open('./dynamic_report.json', 'w') as f:
+            json.dump(response, f, indent=2, sort_keys=True)
+        
+    
+
+
+
 if __name__ == '__main__':
     analyzer_type = input('Application Analyze type (Static[S]/Dynamic[D]): ').lower()
-    # analyzer_type = 's'
+    #analyzer_type = 'd'
     
     SERVER = 'http://localhost:8000'
     APIKEY = '4abeecd72a14e6d537f5701b8bca47bcf488dcb0a2d68c134e029f8b374ef840'
-    print("file select")
-    FILE = filedialog.askopenfilename(initialdir = './',
-                                        title = "파일선택",
-                                        filetypes = (("*.apk","*apk"),("전체보기", "*.*")))
+    
     
     if (analyzer_type == 's'):
         s = static(APIKEY, SERVER)
-
-        RESP = s.upload() # 기본적인 apk 업로드
+        print("file select")
+        FILE = filedialog.askopenfilename(initialdir = './',    
+                                        title = "파일선택",
+                                        filetypes = (("*.apk","*apk"),("전체보기", "*.*")))
+        
+        RESP = s.upload() 
+        main_RESP = RESP
         s.scan(RESP)
 
         analyze = file_analyze.analyze(FILE)
@@ -98,7 +152,23 @@ if __name__ == '__main__':
 
 
     elif (analyzer_type == 'd'):
-        d = dynamic(APIKEY, SERVER)
+        d = dynamic(APIKEY, SERVER)        
+        app_hash = d.dynamic_get_app('sample.apk')
+        with open('./firda script.js') as f:
+            fridacode =f.read()
+        print("app 동적 분석 시작")
+        d.dynamic_start(app_hash)
+
+        print("frida 우회 시작")
+        d.dynamic_frida(app_hash, fridacode)
+
+        input("동적 클릭 종료대면 입력")
+
+        print('dynamic 종료')
+        d.dynamic_stop(app_hash)
+
+        print('dynamic json report')
+        d.dynamic_report_json(app_hash)
         pass
     else :
         print("Wrong input")
