@@ -13,8 +13,8 @@ class analyze:
         command = 'java -jar apktool.jar d -s ' + self.file_path+'.zip' + " -o depack"
         os.system(command)
     
-    def app_tree(self, output):
-        print('app tree')
+    def app_tree(self, output=False):
+        print('app tree analyze')
         folder_name = 'depack'
         self.dir_file('./'+folder_name, 0, output)
 
@@ -37,15 +37,15 @@ class analyze:
                 self.dir_file(folder+'/'+dir, count, output)
                 count-=1
 
-    def aes_decrypt(self, key):
-        print('kill-classes.dex file decrypt')
-        with open('./depack/kill-classes.dex', 'rb') as f:
+    def aes_decrypt(self, file, decrpt_file, aes_key):
+        print(file+' file decrypt')
+        with open(file, 'rb') as f:
             data = f.read()
         
-        cipher = AES.new(key, AES.MODE_ECB)
+        cipher = AES.new(aes_key, AES.MODE_ECB)
         dec = cipher.decrypt(data)
-        print("kill-classes.dex decrpt file to classes2.dex create")
-        with open('./depack/classes2.dex', 'wb') as f:
+        print(file+" decrpt file to "+decrpt_file+" create")
+        with open('./depack/'+decrpt_file, 'wb') as f:
            f.write(dec)
     
     def repack(self):

@@ -1,0 +1,7 @@
+{
+    "app_path":"analyze_app_path",
+    "api_key":"your_mobsf_apikey",
+    "frida_file":"your_frida_file",
+    "server":"your_mobsf_server_ip",
+    "aes_key":"app aes decrypt key"
+}
