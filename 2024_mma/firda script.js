@@ -47,7 +47,54 @@ function bypass_proc(){
   })
 }
 
+function bypass_secure(){
+  Java.perform(function(){
+    var getint = Java.use('android.provider.Settings$Secure').getInt.overload('android.content.ContentResolver', 'java.lang.String', 'int')
+    getint.implementation = function(cr, name, flag) {
+      if(name == 'adb_enabled'){
+        return 0
+      } else{
+        getint.call(this, cr, name, flag)
+      }
+    }
+  })
+  
+}
+
+function bypass_proc2(){
+  Java.perform(function(){
+    var sys = Java.use('java.lang.System')
+    var get = sys.getProperty.overload('java.lang.String')
+    get.implementation = function(key){
+      if(key == 'http.proxyHost' || key =='http.proxyPort' ){
+        console.log(key)
+        return null
+      } else {
+      return get.call(sys, key)
+      }
+    
+    }
+  })
+}
+
+function bypass_network(){
+  Java.perform(function(){
+    var equals = Java.use('java.lang.String').equals.overload('java.lang.Object')
+    equals.implementation = function(compare){
+      if(compare == "tun0" || compare == 'ppp0'){
+        return false
+      } else{
+        return equals.call(this, compare)
+      }
+      
+    }
+  })
+}
+
 bypass_locale()
 bypass_tags()
 bypass_superuser()
 bypass_proc()
+bypass_secure()
+bypass_proc2()
+bypass_network()

@@ -1,0 +1,33 @@
+{
+    "config.json": {
+        "app_path":"분석할 app파일",
+        "api_key":"mobsf의 apikey",
+        "frida_file":"작성한 firda code file",
+        "server": "mobsf 주소",
+        "aes_key": "aes decrypt key"
+    },
+    "file_analyze.py":{
+        "Description": "파일의 apktool을 이용한 depack과 repack, file decrypt",
+        "unpack()": "apktool을 이용하여 apk 파일 depack",
+        "app_tree(output)": "depack 파일 트리 및 classes.dex 파일 외 파일 존재 확인 및 .apk파일 있는지 확인",
+        "aes_decrypt(file, decrpt_file, aes_key)":"file:decrypt 할 파일, decrpt_file: 이름으로 파일 생성, aes_key: 키입력",
+        "repack()":"depack 한 파일들을 .apk파일로 생성"
+    },
+    "mobsf_run.py":{
+        "static":{
+            "Description": "mobsf에서 Static api를 이용한 자동화 클래스",
+            "upload(file)":"file: mobsf에 분석할 파일 ",
+            "scan(data)": "data: upload() return 값 입력, 업로드한 파일 mobsf 분석",
+            "pdf(data, file_name)": "data는 data: upload() return 값 입력, file_name: 정적 분석한 파일 file_name.pdf로 생성"
+        },
+        "dynamic":{
+            "Description": "mobsf에서 static 분석을 한 파일을 동적 분석을 위한 클래스",
+            "dynamic_get_app(app_name)": "app_name: 으로 파일의 hash값 불러옵니다.",
+            "dynamic_start(app_hash)": "app_hash: app_hash가 되는 app을 동적 분석에 다운로드 받습니다.",
+            "dynamic_frida(app_hash, fridacode)":"fridacode: 분석자가 작성한 fridacode를 동적분석에 적용시킵니다.",
+            "dynamic_stop(app_hash)":"app_hash에 해당하는 동적분석 종료",
+            "dynamic_report_json(app_hash)":"app_hash에 해당하는 결과 json파일로 저장"
+
+        }
+    }
+}

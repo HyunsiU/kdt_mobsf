@@ -1,0 +1,7 @@
+{
+    "app_path":"./sample.apk",
+    "api_key":"4abeecd72a14e6d537f5701b8bca47bcf488dcb0a2d68c134e029f8b374ef840",
+    "frida_file":"./firda script.js",
+    "server":"http://localhost:8000",
+    "aes_key":"dbcdcfghijklmaop"
+}
