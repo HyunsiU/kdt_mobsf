@@ -30,7 +30,7 @@ if __name__ == '__main__':
         aes_key = config['aes_key'].encode('utf-8')
         analyze_file = file_analyze.analyze(analyze_app_path)
         analyze_file.unpack()
-        analyze_file.app_tree(False)
+        analyze_file.app_tree('depack', False)
         
         if(analyze_file.analyze_file):
             print("수상한 파일 존재: ", analyze_file.analyze_file)
@@ -55,7 +55,7 @@ if __name__ == '__main__':
                     
                     response = static.upload(file)
                     static.scan(response)
-                    static.pdf(response, './'+pdf_name)
+                #     static.pdf(response, './'+pdf_name)
         pass
     else:
         dynamic = mobsf_run.dynamic(apikey, server)
