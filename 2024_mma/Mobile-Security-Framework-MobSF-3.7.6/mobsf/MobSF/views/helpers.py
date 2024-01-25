@@ -58,6 +58,7 @@ class FileType(object):
                 and self.file_name_lower.endswith('.xapk'))
 
     def is_apk(self):
+        return True
         return (self.file_type in settings.APK_MIME
                 and self.file_name_lower.endswith('.apk'))
 
